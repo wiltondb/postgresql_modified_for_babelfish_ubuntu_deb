@@ -1,0 +1,5 @@
+#!/usr/bin/dh-exec
+
+usr/lib/postgresql/*/lib/*plpython3*.so
+usr/share/locale/*/*/plpython-*.mo
+usr/share/postgresql/*/extension/*plpython3*

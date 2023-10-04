@@ -1,0 +1,5 @@
+#!/usr/bin/dh-exec
+
+usr/lib/postgresql/*/lib/*plperl*.so
+usr/share/locale/*/*/plperl-*.mo
+usr/share/postgresql/*/extension/*plperl*

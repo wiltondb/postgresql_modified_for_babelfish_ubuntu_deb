@@ -1,0 +1,165 @@
+postgresql-15 (15.4+wiltondb3.3-1-1~unreleased) UNRELEASED; urgency=medium
+
+  * WiltonDB 3.3 initial build
+
+ -- WiltonDB Software <info@wiltondb.com>  Wed, 04 Oct 2023 14:48:32 +0100
+
+postgresql-15 (15.4-0ubuntu0.23.04.1) lunar-security; urgency=medium
+
+  * New upstream version (LP: #2028426).
+
+    + A dump/restore is not required for those running 15.X.
+
+    + However, if you use BRIN indexes, it may be advisable to reindex them.
+
+    + Also, if you are upgrading from a version earlier than 15.1, see
+      those release notes as well please.
+
+    + Disallow substituting a schema or owner name into an extension script
+      if the name contains a quote, backslash, or dollar sign (Noah Misch)
+
+      This restriction guards against SQL-injection hazards for trusted
+      extensions.
+      (CVE-2023-39417)
+
+    + Fix MERGE to enforce row security policies properly (Dean Rasheed)
+      (CVE-2023-39418)
+
+    + Fix confusion between empty (no rows) ranges and all-NULL ranges in
+      BRIN indexes, as well as incorrect merging of all-NULL summaries
+      (Tomas Vondra)
+
+      Each of these oversights could result in forgetting that a BRIN
+      index range contains any NULL values, potentially allowing
+      subsequent queries that should return NULL values to miss doing so.
+
+      This fix will not in itself correct faulty BRIN entries.
+      It's recommended to REINDEX any BRIN indexes that
+      may be used to search for nulls.
+
+    + Details about these and many further changes can be found at:
+      https://www.postgresql.org/docs/15/release-15-4.html.
+
+ -- Athos Ribeiro <athos.ribeiro@canonical.com>  Wed, 09 Aug 2023 09:00:47 -0300
+
+postgresql-15 (15.3-0ubuntu0.23.04.1) lunar-security; urgency=medium
+
+  * New upstream version (LP: #2019214).
+
+    + A dump/restore is not required for those running 15.X.
+
+    + Also, if you are upgrading from a version earlier than 15.1, see
+      those release notes as well please.
+
+    + Prevent CREATE SCHEMA from defeating changes in search_path
+      (Alexander Lakhin)
+
+      Within a CREATE SCHEMA command, objects in the prevailing
+      search_path, as well as those in the newly-created schema, would be
+      visible even within a called function or script that attempted to set
+      a secure search_path. This could allow any user having permission to
+      create a schema to hijack the privileges of a security definer
+      function or extension script.
+      (CVE-2023-2454)
+
+    + Enforce row-level security policies correctly after inlining a
+      set-returning function (Stephen Frost, Tom Lane)
+
+      If a set-returning SQL-language function refers to a table having
+      row-level security policies, and it can be inlined into a calling
+      query, those RLS policies would not get enforced properly in some
+      cases involving re-using a cached plan under a different role. This
+      could allow a user to see or modify rows that should have been
+      invisible.
+      (CVE-2023-2455)
+
+    + Details about these and many further changes can be found at:
+      https://www.postgresql.org/docs/15/release-15-3.html.
+
+ -- Sergio Durigan Junior <sergio.durigan@canonical.com>  Thu, 11 May 2023 16:24:27 -0400
+
+postgresql-15 (15.2-1) unstable; urgency=medium
+
+  * New upstream version.
+
+    + libpq can leak memory contents after GSSAPI transport encryption
+      initiation fails (Jacob Champion)
+
+      A modified server, or an unauthenticated man-in-the-middle, can send a
+      not-zero-terminated error message during setup of GSSAPI (Kerberos)
+      transport encryption.  libpq will then copy that string, as well as
+      following bytes in application memory up to the next zero byte, to its
+      error report. Depending on what the calling application does with the
+      error report, this could result in disclosure of application memory
+      contents.  There is also a small probability of a crash due to reading
+      beyond the end of memory.  Fix by properly zero-terminating the server
+      message. (CVE-2022-41862)
+
+ -- Christoph Berg <myon@debian.org>  Tue, 07 Feb 2023 14:57:10 +0100
+
+postgresql-15 (15.1-1) unstable; urgency=medium
+
+  * New upstream version.
+
+ -- Christoph Berg <myon@debian.org>  Tue, 08 Nov 2022 10:59:12 +0100
+
+postgresql-15 (15.0-2) unstable; urgency=medium
+
+  * Add Breaks on dbconfig-common (<< 2.0.22~) which doesn't support the
+    stricter permissions on the default public schema yet.
+  * Cherry-pick 4a6de748d3 from upstream to help fix #1021859.
+  * Mark -doc package as <!nodoc>.
+
+ -- Christoph Berg <myon@debian.org>  Mon, 24 Oct 2022 11:30:00 +0200
+
+postgresql-15 (15.0-1) unstable; urgency=medium
+
+  * New upstream version.
+
+ -- Christoph Berg <myon@debian.org>  Fri, 14 Oct 2022 10:36:49 +0200
+
+postgresql-15 (15~rc2-1) unstable; urgency=medium
+
+  [ Christoph Berg ]
+  * New upstream RC version.
+
+  [ Petter Jacobsen ]
+  * Add . to extension_destdir description.
+
+ -- Christoph Berg <myon@debian.org>  Thu, 06 Oct 2022 14:06:05 +0200
+
+postgresql-15 (15~rc1-1) experimental; urgency=medium
+
+  * New upstream RC version.
+
+ -- Christoph Berg <myon@debian.org>  Tue, 27 Sep 2022 11:31:54 +0200
+
+postgresql-15 (15~beta4-1) experimental; urgency=medium
+
+  * New upstream beta version.
+  * Add Italian debconf translation by Ceppo, thanks! (Closes: #1019162)
+
+ -- Christoph Berg <myon@debian.org>  Tue, 06 Sep 2022 11:44:55 +0200
+
+postgresql-15 (15~beta3-1) experimental; urgency=medium
+
+  * New upstream beta version.
+  * debian/copyright: Update src/backend/regex section.
+  * Update lintian overrides.
+
+ -- Christoph Berg <myon@debian.org>  Wed, 10 Aug 2022 14:33:48 +0200
+
+postgresql-15 (15~beta2-1) experimental; urgency=medium
+
+  * New upstream beta version.
+  * Depend on postgresql-common >= 241.
+  * Disable LLVM JIT on s390x for now. (See #1002029)
+
+ -- Christoph Berg <myon@debian.org>  Tue, 28 Jun 2022 18:20:44 +0200
+
+postgresql-15 (15~beta1-1) experimental; urgency=medium
+
+  * New major upstream version 15; packaging based on postgresql-14.
+  * configure.ac: Remove check for autoconf 2.69.
+
+ -- Christoph Berg <myon@debian.org>  Wed, 18 May 2022 16:26:02 +0200
