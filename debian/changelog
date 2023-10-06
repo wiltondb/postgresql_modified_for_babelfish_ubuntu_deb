@@ -1,4 +1,4 @@
-postgresql-15 (15.4+wiltondb3.3-1-1~unreleased) UNRELEASED; urgency=medium
+postgresql-15 (1:15.4+wiltondb3.3-1-1~UNRELEASED) UNRELEASED; urgency=medium
 
   * WiltonDB 3.3 initial build
 

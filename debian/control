@@ -35,7 +35,8 @@ Build-Depends:
  mawk,
  perl (>= 5.8),
  pkg-config,
- postgresql-common (>= 248+wiltondb3.3-4~),
+ postgresql-common (>= 1:248+wiltondb3.3-1~),
+ postgresql-common (<= 1:248+wiltondb3.3-1),
  python3-dev,
  systemtap-sdt-dev,
  tcl-dev,
@@ -153,8 +154,9 @@ Package: postgresql-15
 Architecture: any
 Depends:
  locales | locales-all,
- postgresql-client-15,
- postgresql-common (>= 248+wiltondb3.3-4~),
+ postgresql-client-15 (= ${binary:Version}),
+ postgresql-common (>= 1:248+wiltondb3.3-1~),
+ postgresql-common (<= 1:248+wiltondb3.3-1),
  ssl-cert,
  tzdata,
  ${misc:Depends},
@@ -181,8 +183,9 @@ Package: postgresql-client-15
 Architecture: any
 Multi-Arch: foreign
 Depends:
- libpq5 (>= ${source:Upstream-Version}),
- postgresql-client-common (>= 248+wiltondb3.3-4~),
+ libpq5  (= ${binary:Version}),
+ postgresql-client-common (>= 1:248+wiltondb3.3-1~),
+ postgresql-client-common (<= 1:248+wiltondb3.3-1),
  sensible-utils,
  ${misc:Depends},
  ${shlibs:Depends},
@@ -208,9 +211,10 @@ Package: postgresql-server-dev-15
 Architecture: any
 Section: libdevel
 Depends:
- libpq-dev (>= 15~~),
- postgresql-client-15,
- postgresql-common (>= 248+wiltondb3.3-4~),
+ libpq-dev (= ${binary:Version}),
+ postgresql-client-15 (= ${binary:Version}),
+ postgresql-common (>= 1:248+wiltondb3.3-1~),
+ postgresql-common (<= 1:248+wiltondb3.3-1),
  ${misc:Depends},
  ${shlibs:Depends},
 Description: development files for PostgreSQL 15 server-side programming
