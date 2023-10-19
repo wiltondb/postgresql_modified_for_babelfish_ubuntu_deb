@@ -1,3 +1,9 @@
+postgresql-15 (1:15.4+wiltondb3.3-2-2~UNRELEASED) UNRELEASED; urgency=medium
+
+  * Disable automatic post-install DB cluster creation
+
+ -- WiltonDB Software <info@wiltondb.com>  Thu, 19 Oct 2023 08:08:59 +0000
+
 postgresql-15 (1:15.4+wiltondb3.3-2-1~UNRELEASED) UNRELEASED; urgency=medium
 
   * Update to wiltondb3.3-2

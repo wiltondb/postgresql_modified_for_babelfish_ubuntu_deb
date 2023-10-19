@@ -4,10 +4,10 @@ set -e
 
 VERSION=${DPKG_MAINTSCRIPT_PACKAGE##*-}
 
-if [ "$1" = configure ]; then
-    . /usr/share/postgresql-common/maintscripts-functions
-
-    configure_version $VERSION "$2"
-fi
+#if [ "$1" = configure ]; then
+#    . /usr/share/postgresql-common/maintscripts-functions
+#
+#    configure_version $VERSION "$2"
+#fi
 
 #DEBHELPER#
