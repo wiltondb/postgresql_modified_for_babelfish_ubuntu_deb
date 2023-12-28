@@ -1,3 +1,9 @@
+postgresql-15 (1:15.4+wiltondb3.3-2-4~UNRELEASED) UNRELEASED; urgency=medium
+
+  * tzdata-legacy dependency for Mantic and later
+
+ -- WiltonDB Software <info@wiltondb.com>  Thu, 28 Dec 2023 16:34:54 +0000
+
 postgresql-15 (1:15.4+wiltondb3.3-2-3~UNRELEASED) UNRELEASED; urgency=medium
 
   * Re-enable automatic post-install action
