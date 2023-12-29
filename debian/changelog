@@ -1,3 +1,9 @@
+postgresql-15 (1:15.4+wiltondb3.3-3-1~UNRELEASED) UNRELEASED; urgency=medium
+
+  * Update to wiltondb3.3-3
+
+ -- WiltonDB Software <info@wiltondb.com>  Fri, 29 Dec 2023 13:38:06 +0000
+
 postgresql-15 (1:15.4+wiltondb3.3-2-4~UNRELEASED) UNRELEASED; urgency=medium
 
   * tzdata-legacy dependency for Mantic and later
